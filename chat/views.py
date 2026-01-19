@@ -7,12 +7,25 @@ from chat.serializers import ChatSerializer, MessageSerializer, ChatDetailSerial
 
 
 class ChatCreateView(generics.CreateAPIView):
+    """
+    Представление для создания нового чата.
+
+    Это представление позволяет создавать новый чат с использованием переданных данных.
+    Используется стандартное поведение CreateAPIView из Django REST framework.
+    """
     queryset = Chat.objects.all()
     serializer_class = ChatSerializer
 
 
 
 class ChatDetailView(generics.RetrieveDestroyAPIView):
+    """
+    Представление для получения и удаления чата.
+
+    Позволяет получить детальную информацию о чате с использованием сериализатора ChatDetailSerializer,
+    а также удалить чат. При GET-запросе возвращается расширенная информация, при других методах —
+    используется ChatSerializer. Удаление выполняется через переопределенный метод perform_destroy.
+    """
     queryset = Chat.objects.all()
 
     def get_serializer_class(self):
@@ -33,6 +46,12 @@ class ChatDetailView(generics.RetrieveDestroyAPIView):
 
 
 class MessageCreateView(generics.CreateAPIView):
+    """
+    Представление для создания нового сообщения в чате.
+
+    Позволяет добавить сообщение в чат с указанным pk в URL. Перед сохранением
+    получает объект чата через get_object_or_404 и привязывает сообщение к этому чату.
+    """
     serializer_class = MessageSerializer
 
     def perform_create(self, serializer):
