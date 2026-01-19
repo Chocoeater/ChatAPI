@@ -1,6 +1,9 @@
+import logging
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, status
 from rest_framework.response import Response
+
+logger = logging.getLogger(__name__)
 
 from chat.models import Chat, Message
 from chat.serializers import ChatSerializer, MessageSerializer, ChatDetailSerializer
@@ -37,11 +40,13 @@ class ChatDetailView(generics.RetrieveDestroyAPIView):
     def retrieve(self, request, *args, **kwargs):
         obj = self.get_object()
         serializer = self.get_serializer(obj, context={'request': request})
-
+        logger.info(f"Получен чат {obj.id}")
         return Response(serializer.data)
 
     def perform_destroy(self, instance):
+        chat_id = instance.id
         instance.delete()
+        logger.info(f"Чат {chat_id} успешно удален")
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -56,5 +61,10 @@ class MessageCreateView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         chat_id = self.kwargs['pk']
-        chat = get_object_or_404(Chat, id=chat_id)
-        serializer.save(chat_id=chat)
+        try:
+            chat = get_object_or_404(Chat, id=chat_id)
+            serializer.save(chat_id=chat)
+            logger.info(f"Сообщение успешно создано в чате {chat_id}")
+        except Exception as e:
+            logger.error(f"Ошибка при создании сообщения в чате {chat_id}: {str(e)}")
+            raise
