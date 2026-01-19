@@ -38,21 +38,14 @@ class ChatDetailView(generics.RetrieveDestroyAPIView):
 
         messages_qs = Message.objects.order_by("-created_at")[:limit]
 
-        return qs.prefetch_related(
-            Prefetch(
-                'messages',
-                queryset=messages_qs,
-                to_attr='last_messages'
-            )
-        )
+        return qs.prefetch_related(Prefetch("messages", queryset=messages_qs, to_attr="last_messages"))
 
     def _get_limit(self) -> int:
-        raw_limit = self.request.query_params.get('limit')
+        raw_limit = self.request.query_params.get("limit")
         try:
             return validate_limit(int(raw_limit))
         except (ValueError, TypeError, ValidationError):
             return 20
-
 
     def get_serializer_class(self):
         if self.request.method == "GET":

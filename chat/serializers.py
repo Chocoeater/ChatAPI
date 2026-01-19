@@ -71,4 +71,3 @@ class ChatDetailSerializer(serializers.ModelSerializer):
     def get_messages(self, obj):
         messages = getattr(obj, "last_messages", [])
         return MessageSerializer(messages, many=True).data
-
