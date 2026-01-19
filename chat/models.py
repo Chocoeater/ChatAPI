@@ -62,7 +62,7 @@ class Message(models.Model):
         verbose_name_plural = "Сообщения"
         ordering = ["-created_at"]
 
-    chat_id = models.ForeignKey(Chat, on_delete=models.CASCADE)
+    chat_id = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name="messages")
     text = models.TextField(null=False, blank=False, max_length=5000)
     created_at = models.DateTimeField(auto_now_add=True)
 

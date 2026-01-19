@@ -69,16 +69,6 @@ class ChatDetailSerializer(serializers.ModelSerializer):
         fields = ["id", "title", "messages"]
 
     def get_messages(self, obj):
-        request = self.context.get("request")
-        limit = 20
-
-        if request and request.query_params.get("limit"):
-            try:
-                limit = int(request.query_params.get("limit"))
-                limit = validate_limit(limit)
-            except (ValidationError, TypeError, ValueError):
-                limit = 20
-
-        messages = Message.objects.filter(chat_id=obj.id).order_by("-created_at")[:limit]
-
+        messages = getattr(obj, "last_messages", [])
         return MessageSerializer(messages, many=True).data
+
