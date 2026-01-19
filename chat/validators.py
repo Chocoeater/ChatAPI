@@ -17,12 +17,16 @@ def validate_title(value: str) -> str:
     """
 
     if not value:
-        raise ValidationError("Заголовок не может быть пустым")
+        raise ValidationError(
+            "Заголовок не может быть пустым"
+        )
 
     value = value.strip()
 
     if not value:
-        raise ValidationError("Заголовок не может состоять только из пробелов")
+        raise ValidationError(
+            "Заголовок не может состоять только из пробелов"
+        )
 
     if len(value) > 200:
         raise ValidationError(
@@ -45,7 +49,17 @@ def validate_text(value: str) -> str:
         ValidationError: Если текст пустой или слишком длинный.
     """
     if not value:
-        raise ValidationError("Текст сообщения не может быть пустым")
+        raise ValidationError(
+            "Текст сообщения не может быть пустым"
+        )
+
+    stripped_value = value.strip()
+
+    if not stripped_value:
+        raise ValidationError(
+            "Текст сообщения не может состоять только из пробелов"
+        )
+
     if len(value) > 5000:
         raise ValidationError(
             "Текст сообщения не может быть длиннее 5000 символов"

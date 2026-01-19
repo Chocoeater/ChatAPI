@@ -61,10 +61,6 @@ class MessageCreateView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         chat_id = self.kwargs['pk']
-        try:
-            chat = get_object_or_404(Chat, id=chat_id)
-            serializer.save(chat_id=chat)
-            logger.info(f"Сообщение успешно создано в чате {chat_id}")
-        except Exception as e:
-            logger.error(f"Ошибка при создании сообщения в чате {chat_id}: {str(e)}")
-            raise
+        chat = get_object_or_404(Chat, id=chat_id)
+        serializer.save(chat_id=chat)
+        logger.info(f"Сообщение успешно создано в чате {chat_id}")

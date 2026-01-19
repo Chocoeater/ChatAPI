@@ -15,6 +15,7 @@ psycopg2 = "^2.9.11"
 [tool.poetry.group.dev.dependencies]
 pytest-django = "^4.5"
 python-dotenv = "^1.0"
+pytest-cov = "^7.0.0"
 
 [build-system]
 requires = ["poetry-core"]
