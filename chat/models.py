@@ -1,4 +1,3 @@
-from django.core.exceptions import ValidationError
 from django.db import models
 
 from chat.validators import validate_title, validate_text
@@ -23,7 +22,7 @@ class Chat(models.Model):
     class Meta:
         verbose_name = "Чат"
         verbose_name_plural = "Чаты"
-        ordering = ['-created_at']
+        ordering = ["-created_at"]
 
     title = models.CharField(null=False, blank=False, max_length=200, verbose_name="Название")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
@@ -37,6 +36,7 @@ class Chat(models.Model):
 
     def __str__(self):
         return f"Чат #{self.id}: {self.title}"
+
 
 class Message(models.Model):
     """Модель сообщения.
@@ -60,7 +60,7 @@ class Message(models.Model):
     class Meta:
         verbose_name = "Сообщение"
         verbose_name_plural = "Сообщения"
-        ordering = ['-created_at']
+        ordering = ["-created_at"]
 
     chat_id = models.ForeignKey(Chat, on_delete=models.CASCADE)
     text = models.TextField(null=False, blank=False, max_length=5000)

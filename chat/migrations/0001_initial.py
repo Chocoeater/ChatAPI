@@ -8,35 +8,56 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Chat',
+            name="Chat",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=200, verbose_name='Название')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=200, verbose_name="Название")),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Дата создания"),
+                ),
             ],
             options={
-                'verbose_name': 'Чат',
-                'verbose_name_plural': 'Чаты',
-                'ordering': ['-created_at'],
+                "verbose_name": "Чат",
+                "verbose_name_plural": "Чаты",
+                "ordering": ["-created_at"],
             },
         ),
         migrations.CreateModel(
-            name='Message',
+            name="Message",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.TextField(max_length=5000)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('chat_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='chat.chat')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("text", models.TextField(max_length=5000)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "chat_id",
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="chat.chat"),
+                ),
             ],
             options={
-                'verbose_name': 'Сообщение',
-                'verbose_name_plural': 'Сообщения',
-                'ordering': ['-created_at'],
+                "verbose_name": "Сообщение",
+                "verbose_name_plural": "Сообщения",
+                "ordering": ["-created_at"],
             },
         ),
     ]

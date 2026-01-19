@@ -17,6 +17,15 @@ pytest-django = "^4.5"
 python-dotenv = "^1.0"
 pytest-cov = "^7.0.0"
 
+
+[tool.poetry.group.lint.dependencies]
+black = "^26.1.0"
+flake8 = "^7.3.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 119
+exclude = '.git'
