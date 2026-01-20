@@ -23,7 +23,9 @@
    git checkout develop
    ```
 
-2. Запустите проект с помощью Docker:
+3. Создайте файл `.env` и добавьте переменные окружения по примеру из `.env.example`
+
+4. Запустите проект с помощью Docker:
    ```bash
    docker-compose up
    ```
