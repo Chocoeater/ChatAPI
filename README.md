@@ -17,14 +17,14 @@
 ## Установка и запуск
 
 1. Склонируйте репозиторий:
-   ```
+   ```bash
    git clone https://github.com/username/ChatAPI.git
    cd ChatAPI
    git checkout develop
    ```
 
 2. Запустите проект с помощью Docker:
-   ```
+   ```bash
    docker-compose up
    ```
 
@@ -65,7 +65,7 @@ logs/               # Логи приложения
 ## Тестирование
 
 Для запуска тестов выполните команду:
-```
+```bash
 docker-compose exec back pytest
 ```
 
