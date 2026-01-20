@@ -9,10 +9,10 @@
 
 ## Технологии
 
-- Python 3.9
-- Django 4.2
-- Django REST Framework
-- PostgreSQL
+- Python 3.13
+- Django 5.0
+- Django REST Framework 3.14
+- PostgreSQL 
 
 ## Установка и запуск
 
